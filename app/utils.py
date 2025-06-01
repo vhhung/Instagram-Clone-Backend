@@ -12,7 +12,13 @@ bucket = client.bucket(BUCKET_NAME)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 # ...
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    if '.' not in filename:
+        return False
+    parts = filename.rsplit('.', 1)
+    if len(parts) < 2 or parts[0] == '':
+        return False
+    return parts[1].lower() in ALLOWED_EXTENSIONS
+    # return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def upload_file_to_gcs(file_obj, destination_folder):

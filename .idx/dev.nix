@@ -6,11 +6,16 @@
   # Use https://search.nixos.org/packages to find packages
   packages = [ 
     pkgs.python3
-    pkgs.mysql 
+    pkgs.mysql
+    pkgs.docker
   ];
 
   services = {
     mysql = {
+      enable = true;
+    };
+
+    docker = {
       enable = true;
     };
   };
